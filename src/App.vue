@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img width="25%" src="./assets/logo.png">
-    <HelloWorld/>
+    <Login v-if="!logado" v-on:on-login="onLogin" :login="user.login" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import Login from "./components/Login";
 
 export default {
   name: "App",
+  data () {
+    return {
+      user: {
+        login: "",
+        senha:""
+      },
+      logado : false
+    };
+  },
+  methods: {
+    onLogin: function() {
+      var token = sessionStorage.getItem('token-this-application');
+      console.log('token = ' + token);
+
+    }
+  },
   components: {
-    HelloWorld
+    Login
   }
 };
 </script>
